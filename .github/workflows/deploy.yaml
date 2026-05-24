@@ -19,5 +19,24 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: dist/;
+          path: dist/
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_TO_ASSUME }}
+          aws-region: ap-southeast-2
+      - run: aws s3 sync dist/ s3://${{ vars.AWS_S3_BUCKET_NAME }} --delete 
+      - run: aws cloudfront create-invalidation --distribution-id ${{ vars.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
       
