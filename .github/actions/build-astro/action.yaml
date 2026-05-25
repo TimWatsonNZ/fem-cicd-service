@@ -1,6 +1,3 @@
-# .github/actions/build-astro/action.yml — Stable stage, segment 9
-# Composite action: setup Node, install with cache, build Astro, upload dist/.
-# Consumed by deploy.yml in segment 9 and by ci.yml + _build.yml in segment 10.
 
 name: Build Astro
 description: Install dependencies with npm cache, build the Astro static site, and upload the dist artifact.

@@ -1,6 +1,3 @@
-# .github/workflows/_build.yml — Stable stage, segment 10
-# Reusable workflow: builds the Astro site by calling the build-astro composite.
-# Triggered only by workflow_call. Both ci.yml and deploy.yml call this.
 
 name: Build (reusable)
 
